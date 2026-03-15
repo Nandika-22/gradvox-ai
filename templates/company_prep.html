@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Company Interview Preparation</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+
+<h2>Company Interview Preparation</h2><br>
+</br>
+<p>Prepare based on company interview patterns and focus areas.</p>
+<style>
+    /* Allow page scrolling */
+body{
+margin:0;
+padding:0;
+overflow-y:auto;
+}
+
+/* Scrollbar on page corner */
+body::-webkit-scrollbar{
+width:10px;
+}
+
+body::-webkit-scrollbar-track{
+background:rgba(255,255,255,0.05);
+}
+
+body::-webkit-scrollbar-thumb{
+background:linear-gradient(180deg,#00eaff,#8b5cf6);
+border-radius:10px;
+}
+
+body::-webkit-scrollbar-thumb:hover{
+background:linear-gradient(180deg,#8b5cf6,#00eaff);
+}
+
+/* Cards layout */
+.cards{
+display:flex;
+flex-direction:column;
+gap:18px;
+align-items:center;
+}
+
+/* Smaller rectangular card */
+.card{
+width:85%;
+max-width:650px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 20px;
+border-radius:14px;
+
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(20px);
+
+box-shadow:
+0 0 20px rgba(139,92,246,0.3),
+0 0 30px rgba(0,234,255,0.15);
+
+transition:0.3s;
+}
+
+/* Card hover */
+.card:hover{
+transform:translateY(-4px);
+box-shadow:
+0 0 30px rgba(139,92,246,0.5),
+0 0 40px rgba(0,234,255,0.25);
+}
+
+/* Logo size smaller */
+.card img{
+width:55px;
+height:55px;
+object-fit:contain;
+}
+
+/* Text spacing */
+.card h2{
+margin:0;
+font-size:20px;
+}
+
+.card p{
+margin:3px 0;
+font-size:14px;
+color:#cbd5f5;
+}
+
+/* Button */
+.card button{
+padding:7px 16px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#00eaff,#8b5cf6);
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+.card button:hover{
+background:linear-gradient(90deg,#8b5cf6,#00eaff);
+}
+</style>
+
+<div class="cards">
+    {% for company in companies %}
+    <div class="card">
+        
+        <img src="{{ company.logo }}" alt="{{ company.name }} logo" width="100">
+        <h2>{{ company.name }}</h2>
+        <br>
+        </br>
+        <p>Focus: {{ company.focus }}</p>
+        <br>
+        <a href="{{ company.link }}"><button>View Skills</button></a>
+    </div>
+    {% endfor %}
+
+    <!-- Option for Other Companies -->
+    <div class="card">
+        <h2>Others</h2>
+        <br>
+        </br>
+        <p>Explore more companies for interview preparation.</p>
+        <br>
+        </br>
+        <a href="/company_detail/Other"><button>View Skills</button></a>
+    </div>
+</div>
+
+<br>
+<a href="/dashboard"><button>Back to Dashboard</button></a>
+
+</div>
+</body>
+</html>

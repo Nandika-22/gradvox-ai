@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>GradVox Dashboard</title>
+
+<script src="/static/particles.js"></script>
+<script src="/static/voice.js"></script>
+
+<style>
+
+/* PAGE */
+
+body{
+margin:0;
+font-family:Poppins;
+background:linear-gradient(135deg,#020617,#0f172a,#020617);
+color:white;
+height:100vh;
+overflow:hidden;
+}
+
+
+/* PARTICLES */
+
+#particles{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+
+/* HEADER */
+
+.header{
+padding-left:90px;
+padding-top:60px;
+}
+
+.header h1{
+font-size:60px;
+color:gold;
+margin:0;
+text-shadow:0 0 20px gold;
+}
+
+.header p{
+margin-top:8px;
+color:#8fdcff;
+font-size:20px;
+}
+
+
+/* MAIN GRID */
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:1fr 1fr 1fr;
+
+align-items:center;
+
+margin-top:40px;
+
+padding:0 80px;
+
+}
+
+
+/* LEFT SIDE */
+
+.left{
+
+display:flex;
+
+flex-direction:column;
+
+gap:30px;
+
+}
+
+
+/* RIGHT SIDE */
+
+.right{
+
+display:flex;
+
+flex-direction:column;
+
+gap:30px;
+
+align-items:flex-start;
+
+}
+
+
+/* CENTER */
+
+.center{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+position:relative;
+
+}
+
+
+/* CARDS */
+
+.card{
+
+width:350px;
+
+padding:22px;
+
+border-radius:16px;
+
+background:linear-gradient(145deg,#0f172a,#020617);
+
+border:1px solid rgba(0,255,255,0.4);
+
+box-shadow:0 0 15px rgba(0,255,255,0.2);
+
+transition:0.4s;
+
+cursor:pointer;
+
+}
+
+.card h2{
+margin:0;
+color:#00f7ff;
+}
+
+.card p{
+margin-top:6px;
+color:#bdeaff;
+}
+
+.card:hover{
+
+transform:scale(1.05);
+
+box-shadow:
+0 0 25px #00f7ff,
+0 0 45px rgba(255,215,0,0.5);
+
+border:1px solid gold;
+
+}
+
+a{
+text-decoration:none;
+}
+
+
+/* AVATAR RING */
+
+.ring{
+
+position:absolute;
+
+width:380px;
+height:380px;
+
+border-radius:50%;
+
+border:4px solid transparent;
+
+border-top:4px solid #00f7ff;
+
+border-right:4px solid gold;
+
+animation:spin 6s linear infinite;
+
+box-shadow:
+0 0 40px #00f7ff,
+0 0 60px gold;
+
+}
+
+
+/* AVATAR */
+
+.avatar{
+
+width:300px;
+height:300px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+z-index:2;
+
+box-shadow:
+0 0 40px rgba(0,255,255,0.5),
+0 0 80px rgba(255,215,0,0.5);
+
+}
+
+
+/* ROTATION */
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+<div id="particles"></div>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h1>GradVox</h1>
+
+<p>Your AI Interview Coach</p>
+
+</div>
+
+
+
+<!-- DASHBOARD GRID -->
+
+<div class="dashboard">
+
+
+<!-- LEFT -->
+
+<div class="left">
+
+<a href="/interview_setup">
+<div class="card">
+<h2>🎤 Start Interview</h2>
+<p>Practice interview with AI</p>
+</div>
+</a>
+
+<a href="/history">
+<div class="card">
+<h2>📜 Open History</h2>
+<p>View your interview attempts</p>
+</div>
+</a>
+
+<a href="/feedback">
+<div class="card">
+<h2>⭐ Share Feedback</h2>
+<p>Help improve GradVox</p>
+</div>
+</a>
+
+</div>
+
+
+
+<!-- CENTER AVATAR -->
+
+<div class="center">
+
+<div class="ring"></div>
+
+<img src="/static/avatar2.png" class="avatar">
+
+</div>
+
+
+
+<!-- RIGHT -->
+
+<div class="right">
+
+<a href="/aptitude">
+<div class="card">
+<h2>🧠 Aptitude Test</h2>
+<p>Practice MNC aptitude questions</p>
+</div>
+</a>
+
+<a href="/company_prep">
+<div class="card">
+<h2>🏢 Company Prep</h2>
+<p>Prepare for company interviews</p>
+</div>
+</a>
+
+<a href="/analytics">
+<div class="card">
+<h2>📊 Performance</h2>
+<p>View your analytics</p>
+</div>
+</a>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+particlesJS("particles",{
+
+particles:{
+number:{value:80},
+size:{value:3},
+move:{speed:1},
+line_linked:{enable:true},
+color:{value:"#00f7ff"}
+}
+
+});
+
+
+window.onload=function(){
+
+let msg=new SpeechSynthesisUtterance(
+"Welcome to GradVox. Choose start interview to begin."
+);
+
+speechSynthesis.speak(msg);
+
+}
+
+</script>
+
+</body>
+</html>

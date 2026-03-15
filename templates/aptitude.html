@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>GradVox Aptitude</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Poppins, sans-serif;
+background:radial-gradient(circle at top,#0f172a,#020617 60%);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* Animated background glow */
+
+body::before{
+content:"";
+position:fixed;
+width:1200px;
+height:1200px;
+background:radial-gradient(circle,#00f7ff22,transparent 60%);
+top:-400px;
+left:-400px;
+animation:floatGlow 12s infinite linear;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:1000px;
+height:1000px;
+background:radial-gradient(circle,#ffd70022,transparent 60%);
+bottom:-400px;
+right:-300px;
+animation:floatGlow 14s infinite linear reverse;
+z-index:-1;
+}
+
+@keyframes floatGlow{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+/* Title (reduced glow) */
+
+h1{
+margin-top:60px;
+font-size:42px;
+font-weight:600;
+color:#facc15;
+letter-spacing:1.5px;
+text-shadow:0 0 8px rgba(250,204,21,0.3);
+}
+
+/* Grid */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:60px;          /* more space between cards */
+padding:100px 220px;  /* more space around grid */
+}
+
+/* Card */
+
+.card{
+
+position:relative;
+
+padding:50px;     /* more space inside cards */
+
+border-radius:22px;
+
+font-size:22px;
+
+font-weight:500;
+
+background:rgba(15,23,42,0.75);
+
+border:1px solid rgba(255,255,255,0.08);
+
+backdrop-filter:blur(15px);
+
+cursor:pointer;
+
+transition:all .35s ease;
+
+box-shadow:0 10px 30px rgba(0,0,0,.6);
+
+}
+
+/* Neon border */
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+border-radius:22px;
+
+padding:2px;
+
+background:linear-gradient(45deg,#00f7ff,#ffd700,#00f7ff);
+
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+
+-webkit-mask-composite:xor;
+
+mask-composite:exclude;
+
+opacity:.35;
+
+transition:.35s;
+
+}
+
+/* Hover */
+
+.card:hover{
+
+transform:translateY(-10px) scale(1.06);
+
+box-shadow:
+0 0 20px rgba(0,247,255,.6),
+0 0 35px rgba(255,215,0,.35),
+0 18px 45px rgba(0,0,0,.9);
+
+}
+
+.card:hover::before{
+opacity:.8;
+}
+
+/* Link */
+
+a{
+text-decoration:none;
+color:white;
+display:block;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Aptitude Practice (MNC Level)</h1>
+
+<div class="grid">
+
+<a href="/start_test/Ratio and Proportion"><div class="card">Ratio & Proportion</div></a>
+
+<a href="/start_test/Time and Work"><div class="card">Time & Work</div></a>
+
+<a href="/start_test/Percentage"><div class="card">Percentage</div></a>
+
+<a href="/start_test/Profit and Loss"><div class="card">Profit & Loss</div></a>
+
+<a href="/start_test/Average"><div class="card">Average</div></a>
+
+<a href="/start_test/Speed Time Distance"><div class="card">Speed & Distance</div></a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Aptitude Test</title>
+
+<style>
+
+body{
+font-family:Poppins, sans-serif;
+background:
+radial-gradient(circle at top right, rgba(255,215,0,0.15), transparent 40%),
+linear-gradient(135deg,#0b1d3a,#0f2a4a,#1a365d);
+color:white;
+padding:50px;
+line-height:1.6;
+}
+
+/* TIMER STYLE */
+
+.timer{
+position:fixed;
+top:20px;
+right:40px;
+font-size:20px;
+font-weight:500;
+color:#facc15;
+background:rgba(11, 23, 53, 0.9);
+padding:10px 18px;
+border-radius:30px;
+border:1px solid rgba(250,204,21,0.5);
+box-shadow:0 0 12px rgba(250,204,21,0.5);
+letter-spacing:1px;
+}
+
+/* TITLE */
+
+h2{
+font-size:28px;
+margin-bottom:25px;
+color:#38bdf8;
+letter-spacing:1px;
+}
+
+/* QUESTION CARD */
+
+.question{
+margin-bottom:22px;
+padding:22px;
+background:rgba(15,23,42,0.85);
+border-radius:14px;
+border:1px solid rgba(56,189,248,0.25);
+backdrop-filter:blur(6px);
+transition:0.3s;
+}
+
+/* HOVER EFFECT */
+
+.question:hover{
+transform:translateY(-2px);
+border:1px solid rgba(56,189,248,0.7);
+box-shadow:0 0 12px rgba(56,189,248,0.35);
+}
+
+/* QUESTION TEXT */
+
+.question p{
+font-size:18px;
+margin-bottom:12px;
+color:#e2e8f0;
+}
+
+/* OPTIONS */
+
+label{
+display:block;
+font-size:16px;
+margin:6px 0;
+cursor:pointer;
+padding:6px 10px;
+border-radius:8px;
+transition:0.2s;
+}
+
+label:hover{
+background:rgba(56,189,248,0.15);
+}
+
+/* RADIO BUTTON */
+
+input[type="radio"]{
+margin-right:8px;
+transform:scale(1.1);
+accent-color:#38bdf8;
+}
+
+/* SUBMIT BUTTON */
+
+button{
+padding:14px 30px;
+background:linear-gradient(45deg,#facc15,#eab308);
+border:none;
+border-radius:10px;
+font-size:17px;
+cursor:pointer;
+margin-top:15px;
+transition:0.25s;
+box-shadow:0 0 10px rgba(250,204,21,0.4);
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 0 16px rgba(250,204,21,0.7);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="timer">
+Time Left: <span id="time">30:00</span>
+</div>
+
+<h2>Aptitude Test</h2>
+
+<form id="testForm" action="/submit_test" method="post">
+
+{% for q in questions %}
+
+<div class="question">
+
+<p><b>{{loop.index}}. {{q.question}}</b></p>
+
+<label><input type="radio" name="q{{loop.index}}" value="A"> {{q.A}}</label><br>
+<label><input type="radio" name="q{{loop.index}}" value="B"> {{q.B}}</label><br>
+<label><input type="radio" name="q{{loop.index}}" value="C"> {{q.C}}</label><br>
+<label><input type="radio" name="q{{loop.index}}" value="D"> {{q.D}}</label>
+
+</div>
+
+{% endfor %}
+
+<button type="submit">Submit Test</button>
+
+</form>
+
+<script>
+
+let time=1800;
+
+let timer=setInterval(function(){
+
+let m=Math.floor(time/60);
+let s=time%60;
+
+document.getElementById("time").innerHTML=
+m+":"+(s<10?"0":"")+s;
+
+time--;
+
+if(time<=0){
+
+clearInterval(timer);
+
+document.getElementById("testForm").submit();
+
+}
+
+},1000);
+
+</script>
+
+</body>
+</html>

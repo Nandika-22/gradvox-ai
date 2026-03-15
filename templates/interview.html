@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>GradVox Interview</title>
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="interview-container">
+
+<h1>GradVox AI Interview</h1><br>
+</br>
+<h3>{{domain}} Interview</h3>
+<br>
+</br>
+
+<img src="/static/avatar.png.avif" class="avatar">
+
+<br>
+</br>
+
+
+
+<div class="question-box">
+<p id="question">Click Start Interview</p>
+</div>
+
+<textarea id="answerBox" placeholder="Your spoken answer will appear here..." readonly></textarea>
+
+<div class="buttons">
+
+<button onclick="startInterview()">Start Interview</button>
+
+<button onclick="startSpeech()">🎤 Speak</button>
+
+<button onclick="stopSpeech()">🎤 Stop</button>
+
+<button onclick="nextQuestion()">Next Question</button>
+
+<button id="submitBtn" onclick="submitInterview()" style="display:none">
+Submit Interview
+</button>
+
+</div>
+
+</div>
+<script>
+
+var questionsData = JSON.parse('{{ questions|tojson|safe }}');
+var currentIndex = 0;
+
+var recognition;
+var finalTranscript = "";
+
+/* AI SPEAK QUESTION */
+
+function speak(text){
+
+var speech = new SpeechSynthesisUtterance(text);
+speech.lang="en-US";
+speech.rate=1;
+
+speechSynthesis.speak(speech);
+
+}
+
+/* START INTERVIEW */
+
+function startInterview(){
+
+document.getElementById("question").innerText = questionsData[currentIndex];
+speak(questionsData[currentIndex]);
+
+}
+
+/* START SPEECH */
+
+function startSpeech(){
+
+if (!('webkitSpeechRecognition' in window)) {
+
+alert("Speech Recognition not supported in this browser.");
+return;
+
+}
+
+recognition = new webkitSpeechRecognition();
+
+recognition.lang = "en-US";
+recognition.continuous = true;
+recognition.interimResults = true;
+
+recognition.onstart = function(){
+
+console.log("Mic started");
+
+}
+
+recognition.onresult = function(event){
+
+let interim = "";
+
+for (let i = event.resultIndex; i < event.results.length; i++){
+
+if(event.results[i].isFinal){
+
+finalTranscript += event.results[i][0].transcript;
+
+}else{
+
+interim += event.results[i][0].transcript;
+
+}
+
+}
+
+document.getElementById("answerBox").value = finalTranscript + interim;
+
+}
+
+recognition.onerror = function(event){
+
+console.log("Error:",event.error);
+
+}
+
+recognition.start();
+
+}
+
+/* STOP SPEECH */
+
+function stopSpeech(){
+
+if(recognition){
+
+recognition.stop();
+
+}
+
+}
+
+/* NEXT QUESTION */
+
+function nextQuestion(){
+
+currentIndex++;
+
+finalTranscript = "";
+
+document.getElementById("answerBox").value="";
+
+if(currentIndex < questionsData.length){
+
+document.getElementById("question").innerText = questionsData[currentIndex];
+speak(questionsData[currentIndex]);
+
+}
+
+if(currentIndex == questionsData.length-1){
+
+document.getElementById("submitBtn").style.display="inline-block";
+
+}
+
+}
+
+/* SUBMIT */
+
+function submitInterview(){
+
+window.location.href="/result";
+
+}
+
+</script>
+</body>
+</html>

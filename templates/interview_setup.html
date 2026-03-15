@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Select Domain | GradVox</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+select{
+    color: #222;          /* visible text color */
+    background-color: #ffffff;
+}
+
+select option{
+    color: #222;          /* visible option text */
+    background-color: #ffffff;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="/static/avatar.png.avif" class="avatar">
+
+<h1>choose your domain</h1>
+
+<p>Select your interview domain to begin your AI mock interview.</p>
+
+{% if error %}
+<div class="error">{{error}}</div>
+{% endif %}
+
+<form method="POST">
+
+<select name="domain" required>
+
+<option value="">Select Your Domain</option>
+
+<option value="Data Scientist">Data Scientist</option>
+<option value="Data Analyst">Data Analyst</option>
+<option value="Full Stack Developer">Full Stack Developer</option>
+<option value="Frontend Developer">Frontend Developer</option>
+<option value="Backend Developer">Backend Developer</option>
+<option value="Software Engineer">Software Engineer</option>
+<option value="UI/UX Designer">UI/UX Designer</option>
+<option value="HR Interview">HR Interview</option>
+
+</select>
+
+<br>
+
+<button type="submit">Start Interview</button>
+
+</form>
+
+</div>
+
+<script>
+
+// GradVox voice assistant
+window.onload = function(){
+
+let speech = new SpeechSynthesisUtterance(
+"Please select your interview domain to begin your GradVox AI interview."
+);
+
+speech.rate = 1;
+speech.pitch = 1;
+speech.lang = "en-US";
+
+speechSynthesis.speak(speech);
+
+}
+
+</script>
+
+</body>
+</html>

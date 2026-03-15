@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+/* Body setup */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f1c4d; /* Dark gradient background */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-y: scroll; /* Page scrollbar */
+}
+
+/* Scrollbar styling for modern look */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #00eaff;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #8b5cf6;
+}
+
+/* Container with scrollable content if needed */
+.history-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,234,255,0.2), 0 0 50px rgba(139,92,246,0.3);
+    overflow-y: auto; /* scroll inside container if content grows */
+    max-height: 80vh; /* container fills most of screen height */
+}
+
+/* Heading */
+.history-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg,#00eaff,#8b5cf6,#facc15);
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 1px;
+}
+
+/* List styling */
+.history-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.history-container li {
+    background: rgba(255,255,255,0.1);
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.history-container li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,234,255,0.3), 0 6px 15px rgba(139,92,246,0.2);
+}
+
+/* No history text */
+.history-container p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #d1d5db;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .history-container {
+        padding: 20px;
+    }
+    .history-container h1 {
+        font-size: 2rem;
+    }
+    .history-container li {
+        padding: 15px;
+        font-size: 0.95rem;
+    }
+}
+</style>
+
+<title>GradVox History</title>
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="history-container">
+
+<h1>Your Interview Attempts</h1>
+
+{% if history %}
+
+<ul>
+
+{% for attempt in history %}
+
+<li>
+
+Attempt {{loop.index}} |
+Domain: {{attempt.domain}} |
+Score: {{attempt.score}}%
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>No interview attempts yet.</p>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Resume Interview Practice</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Resume Based Interview</h1>
+
+<p>Practice explaining your projects and experience.</p>
+
+<ol>
+
+{% for q in questions %}
+
+<li>{{q}}</li>
+
+{% endfor %}
+
+</ol>
+
+<br>
+
+<a href="/dashboard">
+<button>Back to Dashboard</button>
+</a>
+
+</div>
+
+</body>
+</html>
